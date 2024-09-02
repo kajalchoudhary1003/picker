@@ -79,7 +79,7 @@ const ProductPage = ({ params }: { params: { id: string } }) => {
   };
 
   const handleSubmit = async () => {
-    const PROD_URL = "https://krishna-plypicker.vercel.app";
+    const PROD_URL = "https://kajalch-plypicker-pi.vercel.app";
     const WEB_URL =
       process.env.NODE_ENV === "production"
         ? PROD_URL

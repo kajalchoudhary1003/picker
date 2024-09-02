@@ -31,13 +31,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="flex justify-between items-center">
           <p className="text-lg font-bold text-green-600">${product.price}</p>
           <div className="absolute bottom-4 right-4">
-          <Link href={`/product/${product.id}`}>
-            <button className="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200">
-              Edit Product
-            </button>
-          </Link>
+            <Link href={`/product/${product.id}`}>
+              <button className="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200">
+                Edit Product
+              </button>
+            </Link>
           </div>
-         
         </div>
       </div>
     </div>

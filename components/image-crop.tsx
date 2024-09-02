@@ -1,33 +1,33 @@
-"use client"
+"use client";
 
-import React, { type SyntheticEvent } from "react"
+import React, { type SyntheticEvent } from "react";
 
 import ReactCrop, {
   centerCrop,
   makeAspectCrop,
   type Crop,
   type PixelCrop,
-} from "react-image-crop"
+} from "react-image-crop";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogFooter,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 
-import "react-image-crop/dist/ReactCrop.css"
-import { FileWithPreview } from "./crop"
-import { CropIcon, Trash2Icon } from "lucide-react"
+import "react-image-crop/dist/ReactCrop.css";
+import { FileWithPreview } from "./crop";
+import { CropIcon, Trash2Icon } from "lucide-react";
 
 interface ImageCropperProps {
-  dialogOpen: boolean
-  setDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
-  selectedFile: FileWithPreview | null
-  setSelectedFile: React.Dispatch<React.SetStateAction<FileWithPreview | null>>
+  dialogOpen: boolean;
+  setDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedFile: FileWithPreview | null;
+  setSelectedFile: React.Dispatch<React.SetStateAction<FileWithPreview | null>>;
 }
 
 export function ImageCropper({
@@ -36,40 +36,40 @@ export function ImageCropper({
   selectedFile,
   setSelectedFile,
 }: ImageCropperProps) {
-  const aspect = 1
+  const aspect = 1;
 
-  const imgRef = React.useRef<HTMLImageElement | null>(null)
+  const imgRef = React.useRef<HTMLImageElement | null>(null);
 
-  const [crop, setCrop] = React.useState<Crop>()
-  const [croppedImageUrl, setCroppedImageUrl] = React.useState<string>("")
-  const [croppedImage, setCroppedImage] = React.useState<string>("")
+  const [crop, setCrop] = React.useState<Crop>();
+  const [croppedImageUrl, setCroppedImageUrl] = React.useState<string>("");
+  const [croppedImage, setCroppedImage] = React.useState<string>("");
 
   function onImageLoad(e: SyntheticEvent<HTMLImageElement>) {
     if (aspect) {
-      const { width, height } = e.currentTarget
-      setCrop(centerAspectCrop(width, height, aspect))
+      const { width, height } = e.currentTarget;
+      setCrop(centerAspectCrop(width, height, aspect));
     }
   }
 
   function onCropComplete(crop: PixelCrop) {
     if (imgRef.current && crop.width && crop.height) {
-      const croppedImageUrl = getCroppedImg(imgRef.current, crop)
-      setCroppedImageUrl(croppedImageUrl)
+      const croppedImageUrl = getCroppedImg(imgRef.current, crop);
+      setCroppedImageUrl(croppedImageUrl);
     }
   }
 
   function getCroppedImg(image: HTMLImageElement, crop: PixelCrop): string {
-    const canvas = document.createElement("canvas")
-    const scaleX = image.naturalWidth / image.width
-    const scaleY = image.naturalHeight / image.height
+    const canvas = document.createElement("canvas");
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
 
-    canvas.width = crop.width * scaleX
-    canvas.height = crop.height * scaleY
+    canvas.width = crop.width * scaleX;
+    canvas.height = crop.height * scaleY;
 
-    const ctx = canvas.getContext("2d")
+    const ctx = canvas.getContext("2d");
 
     if (ctx) {
-      ctx.imageSmoothingEnabled = false
+      ctx.imageSmoothingEnabled = false;
 
       ctx.drawImage(
         image,
@@ -80,19 +80,19 @@ export function ImageCropper({
         0,
         0,
         crop.width * scaleX,
-        crop.height * scaleY,
-      )
+        crop.height * scaleY
+      );
     }
 
-    return canvas.toDataURL("image/png", 1.0)
+    return canvas.toDataURL("image/png", 1.0);
   }
 
   async function onCrop() {
     try {
-      setCroppedImage(croppedImageUrl)
-      setDialogOpen(false)
+      setCroppedImage(croppedImageUrl);
+      setDialogOpen(false);
     } catch (error) {
-      alert("Something went wrong!")
+      alert("Something went wrong!");
     }
   }
 
@@ -138,7 +138,7 @@ export function ImageCropper({
               className="w-fit"
               variant={"outline"}
               onClick={() => {
-                setSelectedFile(null)
+                setSelectedFile(null);
               }}
             >
               <Trash2Icon className="mr-1.5 size-4" />
@@ -152,14 +152,14 @@ export function ImageCropper({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 
 // Helper function to center the crop
 export function centerAspectCrop(
   mediaWidth: number,
   mediaHeight: number,
-  aspect: number,
+  aspect: number
 ): Crop {
   return centerCrop(
     makeAspectCrop(
@@ -170,9 +170,9 @@ export function centerAspectCrop(
       },
       aspect,
       mediaWidth,
-      mediaHeight,
+      mediaHeight
     ),
     mediaWidth,
-    mediaHeight,
-  )
+    mediaHeight
+  );
 }

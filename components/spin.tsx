@@ -4,7 +4,7 @@ const Spin = () => {
   return (
     <span className="flex flex-row justify-center">
       <svg
-        className={'h-[28px] w-[28px] text-[#000000] animate-spin'}
+        className={"h-[28px] w-[28px] text-[#000000] animate-spin"}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
