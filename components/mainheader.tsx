@@ -10,19 +10,6 @@ const logout = () => {
 };
 
 const Header = () => {
-    const [role, setRole] = useState<string | null>(null);
-
-     // Fetch user role from local storage or API
-  useEffect(() => {
-    const userRole = localStorage.getItem("role"); // Assuming role is stored in local storage
-    console.log("Fetched user role:", userRole);
-    setRole(userRole);
-
-  }, []);
-
-   // Determine the home path based on the role
-   const homePath = role === "admin" ? "/dashboard/admin" : "/dashboard/team";
-   console.log("Home path:", homePath);
   return (
     <header className="md:bg-white/95 md:z-50 dark:bg-gray-800 py-2.5 md:border-b-2 md:border-white/80 md:sticky md:top-0 ">
       <nav className="container mx-auto px-4 lg:px-0 flex justify-between items-center">
@@ -64,7 +51,7 @@ const Header = () => {
           <div className="flex space-x-5 items-center">
             {/* Home Link with Dynamic Navigation */}
             <Link
-              href={homePath}
+              href={"/dashboard"}
               className="cursor-pointer md:text-purple-900 md:hover:scale-105 md:font-semibold group inline-block py-2 pr-4 pl-3 text-[20px] text-white/80 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
             >
               Home
